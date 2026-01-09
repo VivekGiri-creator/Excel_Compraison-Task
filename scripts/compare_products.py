@@ -2,7 +2,7 @@ import openpyxl
 import os
 import time
 
-EXCEL_FILE = "Batch 5 - 08 Jan-Vivek.xlsx"
+EXCEL_FILE = "Batch 5 - 09 Jan-Vivek.xlsx"
 
 def process_excel():
     """Process Excel file and update Status column"""
@@ -22,14 +22,14 @@ def process_excel():
                 # F = Dell Publisher (6)
                 # G = SNOW Publisher (7)
                 # K = Status (11)
-                # L = Prompt (12)
+                # N = Prompt (14)
                 
                 dell_product = ws.cell(row=row, column=4).value
                 snow_product = ws.cell(row=row, column=5).value
                 dell_publisher = ws.cell(row=row, column=6).value
                 snow_publisher = ws.cell(row=row, column=7).value
                 status_cell = ws.cell(row=row, column=11)
-                prompt = ws.cell(row=row, column=12).value
+                prompt = ws.cell(row=row, column=14).value
                 
                 # Skip if already processed
                 if status_cell.value in ["Match", "Not Match"]:
