@@ -5,7 +5,7 @@ import openpyxl
 from openai import OpenAI
 from datetime import datetime
 
-EXCEL_FILE = "Batch 5 - 09 Jan-Vivek.xlsx"
+EXCEL_FILE = os.getenv("EXCEL_PATH", "Batch 5 - 09 Jan-Vivek.xlsx")
 
 def call_llm(prompt: str) -> str:
     """Send prompt to OpenAI model and return response text"""
@@ -92,27 +92,24 @@ Input pair:
 **Required Output Structure (exactly in this order):**
 1) Brand (Publisher) Check  
    - Clearly state the publisher for Item A and Item B, and whether the publishers are the same or different.  
-   - Keep it factual, one or two bullets per item.
 
 2) Product Check  
-   - Explain what Item A is and does (purpose, contents/feature-set, typical use).  
-   - Explain what Item B is and does (purpose, contents/feature-set, typical use).  
-   - Conclude whether the products are the same or different based on function/contents/scope.
+   - Explain what Item A is and does.  
+   - Explain what Item B is and does.  
+   - Conclude whether the products are the same or different.  
 
 3) Key Differences  
-   - 3–6 bullet points capturing the most important differences (purpose, contents, audience, licensing, platform, etc.).  
-   - Keep bullets short and compare directly.
+   - 3–6 bullet points capturing the most important differences.  
 
 4) Summary  
-   - 2–4 lines summarizing the relationship.
+   - 2–4 lines summarizing the relationship.  
 
 5) Conclusion  
    - Two bullets only:
      - Brand: Same / Different
      - Product: Same / Different
 
-6) Final result: Same / Not same  
-   - **Single word after the colon**: “Same” if the products are simply the same; “Not same” if they differ.
+6) Final result: Same / Not same
 """
 
                 # Call AI
