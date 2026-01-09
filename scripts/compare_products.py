@@ -2,17 +2,18 @@ import os
 import time
 import re
 import openpyxl
-from openai import OpenAI
+import openai
 from datetime import datetime
 
+# Excel file path from workflow environment
 EXCEL_FILE = os.getenv("EXCEL_PATH", "Batch 5 - 09 Jan-Vivek.xlsx")
 
 def call_llm(prompt: str) -> str:
     """Send prompt to OpenAI model and return response text"""
-    client = OpenAI(api_key=os.getenv("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"))
+    openai.api_key = os.getenv("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")
     model = os.getenv("MODEL_NAME", "gpt-4o-mini")
 
-    response = client.chat.completions.create(
+    response = openai.ChatCompletion.create(
         model=model,
         messages=[
             {"role": "system", "content": "You are a precise comparison assistant. Follow the structure exactly."},
@@ -20,7 +21,7 @@ def call_llm(prompt: str) -> str:
         ],
         temperature=0.2,
     )
-    return response.choices[0].message.content.strip()
+    return response.choices[0].message["content"].strip()
 
 def parse_conclusion_and_final(text: str):
     """Extract Brand, Product, and Final result from AI output"""
