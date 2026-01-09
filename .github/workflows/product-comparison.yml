@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      EXCEL_PATH: Batch.xlsx
-      MODEL_API_URL: "https://api.openai.com/v1/chat/completions"   # OpenAI endpoint
-      MODEL_API_KEY: ${{ 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 }}                          # your GitHub secret
-      MODEL_NAME: gpt-4o-mini                                       # or whichever model you want
+      EXCEL_PATH: "Batch 5 - 09 Jan-Vivek.xlsx"
+      MODEL_API_URL: "https://api.openai.com/v1/chat/completions"
+      MODEL_API_KEY: ${{ secrets.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 }}   # your GitHub secret name
+      MODEL_NAME: gpt-4o-mini                # recommended model
 
     steps:
       - name: Checkout repository
