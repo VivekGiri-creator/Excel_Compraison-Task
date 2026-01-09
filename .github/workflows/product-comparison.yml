@@ -1,0 +1,37 @@
+name: Product Comparison Automation
+
+on:
+  workflow_dispatch:  
+  push:
+    paths:  
+      - 'Batch*. xlsx'
+
+jobs:
+  compare-products: 
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with: 
+          python-version: '3.11'
+      
+      - name:  Install dependencies
+        run: |
+          pip install openpyxl requests
+      
+      - name: Run product comparison script
+        env:
+          GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/compare_products.py
+      
+      - name:  Commit and push changes
+        run: |
+          git config --local user.email "action@github. com"
+          git config --local user.name "GitHub Action"
+          git add "Batch*.xlsx"
+          git commit -m "Update comparison results" || echo "No changes"
+          git push
